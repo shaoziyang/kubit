@@ -4,8 +4,7 @@
     "description": "酷比特 makecode 扩展",
     "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "neopixel": "github:Microsoft/pxt-neopixel"
+        "core": "*"
     },
     "files": [
         "README.md",
