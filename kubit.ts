@@ -1,3 +1,6 @@
+/**
+
+*/
 //% weight=50 color=#cc1280 icon="K" block="酷比特"
 namespace kubit {
     let i2cAddr: number // 0x3F: PCF8574A, 0x27: PCF8574
