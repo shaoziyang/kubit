@@ -1,4 +1,4 @@
-//% weight=50 color=#cc1280 icon="K" block="¿á±ÈÌØ"
+//% weight=50 color=#cc1280 icon="K" block="é…·æ¯”ç‰¹"
 namespace kubit {
     let i2cAddr: number // 0x3F: PCF8574A, 0x27: PCF8574
     let BK: number      // backlight control
@@ -33,7 +33,7 @@ namespace kubit {
         set(d << 4)
     }
 
-    // ×Ô¶¯Ê¶±ðI2CµØÖ·
+    // è‡ªåŠ¨è¯†åˆ«I2Cåœ°å€
     function AutoAddr() {
         let k = true
         let addr = 0x20
@@ -62,10 +62,10 @@ namespace kubit {
     }
 
     /**
-     * ³õÊ¼»¯ LCD, ÉèÖÃ I2C µØÖ·¡£¸ù¾ÝÐ¾Æ¬²»Í¬µØÖ·ÓÐÁ½ÖÖ£¬PCF8574 ÊÇ 39£¬PCF8574A ÊÇ 63, µØÖ·ÉèÖÃÎª0 ´ú±í×Ô¶¯Ê¶±ð
+     * åˆå§‹åŒ– LCD, è®¾ç½® I2C åœ°å€ã€‚æ ¹æ®èŠ¯ç‰‡ä¸åŒåœ°å€æœ‰ä¸¤ç§ï¼ŒPCF8574 æ˜¯ 39ï¼ŒPCF8574A æ˜¯ 63, åœ°å€è®¾ç½®ä¸º0 ä»£è¡¨è‡ªåŠ¨è¯†åˆ«
      * @param address is i2c address for LCD, eg: 0, 39, 63
      */
-    //% blockId="KUBIT_I2C_LCD1620_SET_ADDRESS" block="³õÊ¼»¯Òº¾§£¬I2C µØÖ· %addr"
+    //% blockId="KUBIT_I2C_LCD1620_SET_ADDRESS" block="åˆå§‹åŒ–æ¶²æ™¶ï¼ŒI2C åœ°å€ %addr"
     //% weight=100 blockGap=8
     export function LcdInit(Addr: number) {
         if (Addr == 0) i2cAddr = AutoAddr()
@@ -85,12 +85,12 @@ namespace kubit {
     }
 
     /**
-     * ÔÚÒº¾§µÄÖ¸¶¨Î»ÖÃÏÔÊ¾Êý×Ö
+     * åœ¨æ¶²æ™¶çš„æŒ‡å®šä½ç½®æ˜¾ç¤ºæ•°å­—
      * @param n is number will be show, eg: 10, 100, 200
      * @param x is LCD column position, eg: 0
      * @param y is LCD row position, eg: 0
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHOW_NUMBER" block="ÏÔÊ¾Êý×Ö %n|Î»ÖÃ x %x|y %y"
+    //% blockId="KUBIT_I2C_LCD1620_SHOW_NUMBER" block="æ˜¾ç¤ºæ•°å­— %n|ä½ç½® x %x|y %y"
     //% weight=90 blockGap=8
     //% x.min=0 x.max=15
     //% y.min=0 y.max=1
@@ -100,12 +100,12 @@ namespace kubit {
     }
 
     /**
-     * ÔÚÒº¾§µÄÖ¸¶¨Î»ÖÃÏÔÊ¾×Ö·û´®
+     * åœ¨æ¶²æ™¶çš„æŒ‡å®šä½ç½®æ˜¾ç¤ºå­—ç¬¦ä¸²
      * @param s is string will be show, eg: "Hello"
      * @param x is LCD column position, [0 - 15], eg: 0
      * @param y is LCD row position, [0 - 1], eg: 0
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHOW_STRING" block="ÏÔÊ¾×Ö·û´® %s|Î»ÖÃ x %x|y %y"
+    //% blockId="KUBIT_I2C_LCD1620_SHOW_STRING" block="æ˜¾ç¤ºå­—ç¬¦ä¸² %s|ä½ç½® x %x|y %y"
     //% weight=90 blockGap=8
     //% x.min=0 x.max=15
     //% y.min=0 y.max=1
@@ -125,10 +125,10 @@ namespace kubit {
     }
 
     /**
-     * Òº¾§ÏÔÊ¾¿ØÖÆ
+     * æ¶²æ™¶æ˜¾ç¤ºæŽ§åˆ¶
      * @param on , eg: true
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHOW" block="Òº¾§ÏÔÊ¾ %on"
+    //% blockId="KUBIT_I2C_LCD1620_SHOW" block="æ¶²æ™¶æ˜¾ç¤º %on"
     //% weight=81 blockGap=8
     export function show(on: boolean): void {
         if (on) cmd(0x0C)
@@ -136,19 +136,19 @@ namespace kubit {
     }
 
     /**
-     * Çå³ýÒº¾§ÉÏÏÔÊ¾µÄÄÚÈÝ
+     * æ¸…é™¤æ¶²æ™¶ä¸Šæ˜¾ç¤ºçš„å†…å®¹
      */
-    //% blockId="KUBIT_I2C_LCD1620_CLEAR" block="Çå³ýÒº¾§ÏÔÊ¾ÄÚÈÝ"
+    //% blockId="KUBIT_I2C_LCD1620_CLEAR" block="æ¸…é™¤æ¶²æ™¶æ˜¾ç¤ºå†…å®¹"
     //% weight=85 blockGap=8
     export function clear(): void {
         cmd(0x01)
     }
 
     /**
-     * Òº¾§µÄ±³¹â¿ØÖÆ
+     * æ¶²æ™¶çš„èƒŒå…‰æŽ§åˆ¶
      * @param on , eg: true
      */
-    //% blockId="KUBIT_I2C_LCD1620_BACKLIGHT" block="Òº¾§±³¹â %on"
+    //% blockId="KUBIT_I2C_LCD1620_BACKLIGHT" block="æ¶²æ™¶èƒŒå…‰ %on"
     //% weight=70 blockGap=8
     export function Backlight(on: boolean): void {
         if (on) BK = 8
@@ -157,18 +157,18 @@ namespace kubit {
     }
 
     /**
-     * ÆÁÄ»Ïò×óÒÆ¶¯
+     * å±å¹•å‘å·¦ç§»åŠ¨
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHL" block="ÆÁÄ»×óÒÆ"
+    //% blockId="KUBIT_I2C_LCD1620_SHL" block="å±å¹•å·¦ç§»"
     //% weight=61 blockGap=8
     export function shl(): void {
         cmd(0x18)
     }
 
     /**
-     * ÆÁÄ»ÏòÓÒÒÆ¶¯
+     * å±å¹•å‘å³ç§»åŠ¨
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHR" block="ÆÁÄ»ÓÒÒÆ"
+    //% blockId="KUBIT_I2C_LCD1620_SHR" block="å±å¹•å³ç§»"
     //% weight=60 blockGap=8
     export function shr(): void {
         cmd(0x1C)
