@@ -126,11 +126,12 @@ namespace kubit {
 
     /**
      * “∫æßœ‘ æøÿ÷∆
+     * @param on , eg: true
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHOW" block="“∫æßœ‘ æ"
+    //% blockId="KUBIT_I2C_LCD1620_SHOW" block="“∫æßœ‘ æ %on"
     //% weight=81 blockGap=8
-    export function show(on:boolean): void {
-        if(on)cmd(0x0C)
+    export function show(on: boolean): void {
+        if (on) cmd(0x0C)
         else cmd(0x08)
     }
 
@@ -145,11 +146,12 @@ namespace kubit {
 
     /**
      * “∫æßµƒ±≥π‚øÿ÷∆
+     * @param on , eg: true
      */
-    //% blockId="KUBIT_I2C_LCD1620_BACKLIGHT" block="πÿ±’“∫æß±≥π‚"
+    //% blockId="KUBIT_I2C_LCD1620_BACKLIGHT" block="“∫æß±≥π‚ %on"
     //% weight=70 blockGap=8
-    export function Backlight(on:boolean): void {
-        if(on)BK=8
+    export function Backlight(on: boolean): void {
+        if (on) BK = 8
         else BK = 0
         cmd(0)
     }
