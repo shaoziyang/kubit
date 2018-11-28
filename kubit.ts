@@ -7,6 +7,16 @@ namespace kubit {
     let BK: number      // backlight control
     let RS: number      // command/data
 
+    /**
+     * 舵机控制
+     */
+    //% blockId="KUBIT_SERVO" block="舵机控制，引脚 %p|角度 %v"
+    //% weight=200 blockGap=8
+    //% p.defl=AnalogPin.P2 v.defl=90
+    export function servo(p: AnalogPin, v: number) {
+        pins.servoWritePin(p, v)
+    }
+
     // set LCD reg
     function setreg(d: number) {
         pins.i2cWriteNumber(i2cAddr, d, NumberFormat.Int8LE)
