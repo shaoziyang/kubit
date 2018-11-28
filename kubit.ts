@@ -141,7 +141,7 @@ namespace kubit {
      * 液晶显示控制
      * @param on , eg: true
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHOW" block="液晶显示 %on"
+    //% blockId="KUBIT_I2C_LCD1620_SHOW" block="液晶显示 %on" advanced=true
     //% weight=81 blockGap=8
     export function show(on: boolean): void {
         if (on) cmd(0x0C)
@@ -151,7 +151,7 @@ namespace kubit {
     /**
      * 清除液晶上显示的内容
      */
-    //% blockId="KUBIT_I2C_LCD1620_CLEAR" block="清除液晶显示内容"
+    //% blockId="KUBIT_I2C_LCD1620_CLEAR" block="清除液晶显示内容" advanced=true
     //% weight=85 blockGap=8
     export function clear(): void {
         cmd(0x01)
@@ -161,7 +161,7 @@ namespace kubit {
      * 液晶的背光控制
      * @param on , eg: true
      */
-    //% blockId="KUBIT_I2C_LCD1620_BACKLIGHT" block="液晶背光 %on"
+    //% blockId="KUBIT_I2C_LCD1620_BACKLIGHT" block="液晶背光 %on" advanced=true
     //% weight=70 blockGap=8
     export function Backlight(on: boolean): void {
         if (on) BK = 8
@@ -172,7 +172,7 @@ namespace kubit {
     /**
      * 屏幕向左移动
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHL" block="屏幕左移"
+    //% blockId="KUBIT_I2C_LCD1620_SHL" block="屏幕左移" advanced=true
     //% weight=61 blockGap=8
     export function shl(): void {
         cmd(0x18)
@@ -181,7 +181,7 @@ namespace kubit {
     /**
      * 屏幕向右移动
      */
-    //% blockId="KUBIT_I2C_LCD1620_SHR" block="屏幕右移"
+    //% blockId="KUBIT_I2C_LCD1620_SHR" block="屏幕右移" advanced=true
     //% weight=60 blockGap=8
     export function shr(): void {
         cmd(0x1C)
