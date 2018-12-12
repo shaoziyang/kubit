@@ -1,11 +1,106 @@
 /**
-
+  KuBit
 */
+
+// 电机1引脚定义
+enum Moto1Pin {
+    //% block="A:P10 B:P15"
+    _MAB,
+    //% block="A:P15 B:P10"
+    _MBA
+}
+// 电机2引脚定义
+enum Moto2Pin {
+    //% block="A:P13 B:P14"
+    _MAB,
+    //% block="A:P14 B:P13"
+    _MBA
+}
+
 //% weight=50 color=#cc1280 icon="K" block="酷比特"
 namespace kubit {
     let i2cAddr: number // 0x3F: PCF8574A, 0x27: PCF8574
     let BK: number      // backlight control
     let RS: number      // command/data
+    let _M1A: AnalogPin
+    let _M1B: AnalogPin
+    let _M2A: AnalogPin
+    let _M2B: AnalogPin
+
+    /**
+     * 电机引脚设置
+     */
+    //% blockId="KUBIT_MOTO" block="电机控制：电机1引脚 %m1|电机2引脚 %m2" inlineInputMode=inline
+    //% weight=200 blockGap=8 
+    export function moto(m1: Moto1Pin, m2: Moto2Pin) {
+        if (m1 == Moto1Pin._MAB) {
+            _M1A = AnalogPin.P10
+            _M1B = AnalogPin.P15
+        }
+        else {
+            _M1A = AnalogPin.P15
+            _M1B = AnalogPin.P10
+        }
+        if (m2 == Moto2Pin._MAB) {
+            _M2A = AnalogPin.P13
+            _M2B = AnalogPin.P14
+        }
+        else {
+            _M2A = AnalogPin.P14
+            _M2B = AnalogPin.P13
+        }
+    }
+
+    /**
+     * 电机停止
+     */
+    //% blockId="KUBIT_MOTO_STOP" block="电机停止"
+    //% weight=200 blockGap=8 
+    export function moto_stop() {
+        pins.analogWritePin(_M1A, 0)
+        pins.analogWritePin(_M1B, 0)
+        pins.analogWritePin(_M2A, 0)
+        pins.analogWritePin(_M2B, 0)
+    }
+
+    /**
+     * 左转
+     */
+    //% blockId="KUBIT_MOTO_LEFT" block="向左转"
+    //% weight=200 blockGap=8 
+    export function moto_left() {
+        pins.analogWritePin(_M1A, 0)
+        pins.analogWritePin(_M1B, 0)
+        pins.analogWritePin(_M2A, 800)
+        pins.analogWritePin(_M2B, 0)
+    }
+
+    /**
+     * 右转
+     */
+    //% blockId="KUBIT_MOTO_RIGHT" block="向右转"
+    //% weight=200 blockGap=8 
+    export function moto_right() {
+        pins.analogWritePin(_M1A, 800)
+        pins.analogWritePin(_M1B, 0)
+        pins.analogWritePin(_M2A, 0)
+        pins.analogWritePin(_M2B, 0)
+    }
+
+    /**
+     * 电机速度控制
+     */
+    //% blockId="KUBIT_MOTO_SPEED" block="电机速度 电机1: %v1| 电机2: %v2"
+    //% weight=200 blockGap=8
+    //% v1.defl=800 v1.max=1000 v1.min=-1000
+    //% v2.defl=800 v2.max=1000 v2.min=-1000
+    export function moto_speed(v1: number, v2: number) {
+        pins.analogWritePin(_M1A, 800)
+        pins.analogWritePin(_M1B, 0)
+        pins.analogWritePin(_M2A, 0)
+        pins.analogWritePin(_M2B, 0)
+    }
+
 
     /**
      * 舵机控制
@@ -17,6 +112,10 @@ namespace kubit {
         pins.servoWritePin(p, v)
     }
 
+
+    /**
+     * 液晶控制
+     */
     // set LCD reg
     function setreg(d: number) {
         pins.i2cWriteNumber(i2cAddr, d, NumberFormat.Int8LE)
@@ -151,7 +250,7 @@ namespace kubit {
     /**
      * 清除液晶上显示的内容
      */
-    //% blockId="KUBIT_I2C_LCD1620_CLEAR" block="清除液晶显示内容" advanced=true
+    //% blockId="KUBIT_I2C_LCD1620_CLEAR" block="清除液晶显示内容"
     //% weight=85 blockGap=8
     export function clear(): void {
         cmd(0x01)
